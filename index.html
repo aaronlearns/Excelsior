@@ -10,7 +10,7 @@
 </head>
 <body onload="setInterval(updateTime,500)">
     <div class="container">
-        <div class="center">
+        <div class="">
             <div class="center">
                 <span id="clock">
                     <span data-number class="clockNum"></span>
@@ -22,7 +22,7 @@
                     
                 </span>
             </div>
-            <div id="calc">
+            <div id="calc" class="center">
                 <div id="calcButtons">
                     <button data-operation class="calcButton">+</button>
                     <button data-operation class="calcButton">-</button>
@@ -34,12 +34,12 @@
                     <button data-submit-equals id="submit" class="calcButton">=/SUBMIT</button>
                 </div>
                 <div data-display id="display"></div>
-                <div class="threeem">
+                <div class="center threeem">
                     GOAL: <span data-goal>1</span><br>
                     <!-- SCORE: <span data-score>-1</span> -->
                 </div>
             </div>
-            <div>
+            <div class="rules">
                 <h1><u>RULES</u></h1>
                 <ul>
                     <li>Standard calculator, but the number buttons are a digital clock!</li>

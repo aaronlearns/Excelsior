@@ -83,6 +83,10 @@
     color: var(--display-color-text);
 }
 
+.rules li {
+    font-size: 18pt;
+}
+
 .twoem {
     font-size: 2em;
 }
