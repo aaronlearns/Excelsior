@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body onload="setInterval(updateTime,500)">
+    <div class="container">
+        <div class="center">
+            <div>
+                <span id="clock">
+                    <span data-number class="clockNum"></span>
+                    <span data-number class="clockNum"></span>:
+                    <span data-number class="clockNum"></span>
+                    <span data-number class="clockNum"></span>
+                </span>
+                <span id="seconds">
+                    
+                </span>
+            </div>
+            <div id="calc">
+                <div id="calcButtons">
+                    <button data-operation class="calcButton">+</button>
+                    <button data-operation class="calcButton">-</button>
+                    <button data-operation class="calcButton">*</button>
+                    <button data-operation class="calcButton">÷</button>
+                    <!-- <button data-equals class="calcButton">=</button> -->
+                    <button data-delete class="calcButton">DEL</button>
+                    <button data-all-clear class="calcButton">AC</button>
+                    <button data-submit-equals id="submit" class="calcButton">=/SUBMIT</button>
+                </div>
+                <div data-display id="display"></div>
+                <div class="threeem">
+                    GOAL: <span data-goal>1</span><br>
+                    <!-- SCORE: <span data-score>-1</span> -->
+                </div>
+            </div>
+        </div>
+        <div class='twoem'>
+            HIGHEST: <span data-record></span>
+        </div>
+    </div>
+</body>
+<script src="main.js"></script>
+</html>

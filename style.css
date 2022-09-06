@@ -1,0 +1,111 @@
+:root {
+    --background-color: white;
+
+    --clock-color: black;
+    --seconds-color: grey;
+    
+    --display-color-background: #8b966e;
+    --display-color-text: black;
+
+    --calc-button-color: rgb(190, 188, 188);
+}
+
+.fifteenpt {
+    font-size: 15pt;
+}
+
+#calcButtons {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+#calcButtons #submit {
+    font-size: 20pt;
+}
+
+.calcButton {
+    background-color: var(--calc-button-color);
+    font-size: 30pt;
+    padding: 0 20px;
+    border-radius: .235em;
+}
+.calcButton:hover {
+    filter: brightness(125%);
+}
+.calcButton:active {
+    filter: brightness(75%);
+}
+
+.center {
+    text-align: center;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 80% 20%;
+}
+
+#countdown {
+    font-size: 5rem;
+}
+
+#clock {
+    font-size: 10em;
+}
+
+.clockNum {
+    border: var(--background-color);
+    background-color: var(--background-color);
+    font-size: inherit;
+}
+.clockNum:hover {
+    color: var(--seconds-color);
+    filter: brightness(125%);
+}
+.clockNum:active {
+    filter: brightness(75%)
+}
+
+#display {
+    margin: 10px;
+    height:6rem;
+    width:inherit;
+
+    display: flex;
+    justify-content: flex-start;
+
+    font-size: 5em;
+    font-family:'Courier New', Courier, monospace;
+
+    background-color: var(--display-color-background);
+    border: black;
+    border-radius: 5px;
+    color: var(--display-color-text);
+}
+
+.twoem {
+    font-size: 2em;
+}
+
+.threeem {
+    font-size: 3em;
+}
+
+#goalNum {
+    font-size: 2em;
+}
+
+.num-inuse {
+    filter: brightness(150%);
+}
+
+.op-inuse {
+    color: var(--background-color);
+    background-color: var(--clock-color);
+}
+
+#seconds {
+    color: var(--seconds-color);
+    font-size:36pt;
+    margin: 15px;
+}
