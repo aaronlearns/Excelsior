@@ -1,3 +1,6 @@
+// Necessary class types are declared at the top, game runtime processes are laid out towards the bottom.
+
+// This class controls the player's stats for the display and (maybe) for a future back-end 
 // Goal gets it's own class in case of later multiplayer version, where we'd have multiple goals onscreen.
 class ScoreGoalRecord {
     constructor(goalElement,recordElement,scoreElement) {
@@ -30,6 +33,7 @@ class ScoreGoalRecord {
     updateScoreDisplay() {this.scoreElement.innerHTML = `${this.score}`;}
 }
 
+// Declaration newGame variable ensures stats get reset.
 newGame = true;
 const goalElement = document.querySelector('[data-goal]');
 const recordElement = document.querySelector('[data-record]');
@@ -37,6 +41,7 @@ const scoreElement = document.querySelector('[data-score]');
 const stats = new ScoreGoalRecord(goalElement,recordElement,scoreElement);
 newGame = false
 
+// Controls the calculator mechanism.
 class Calculator {
     constructor(currentOperandTextElement){
         this.currentOperandTextElement = currentOperandTextElement;
@@ -79,8 +84,7 @@ class Calculator {
             this.operation = operation;
     }
 
-    // The part that does the actual math. Note that only the operation is changed, leaving room
-    // for whatever function this appears inside of to do other things with the operands.
+    // The part that does the actual math. Maybe change this in the future to make it easier to add new operations.
     compute() {
         let computation;
         const prev = parseFloat(this.previousOperand);
@@ -109,7 +113,8 @@ class Calculator {
         return computation;
     }
 
-    // The 'next' argument being like this is important for operation buttons being implicit equals.
+    // The actual "equals" button is "submit-equals" so you can't press equals just to see your answer without submitting.
+    // The 'next' argument being like this is important for the operation buttons being implicit "equals".
     pushOperands(next='') {
         this.previousOperand = this.currentOperand;
         this.currentOperand = next;
@@ -121,7 +126,7 @@ class Calculator {
     }
 }
 
-// When time runs down on the clock...
+// When your minute is up...
 function minuteRefresh() {
     // Checking if a new record has been set.
     if (stats.score > stats.record) {
@@ -184,7 +189,8 @@ const updateTime = (isMilitary=true) => {
     }
 }
 
-// This keeps track of calculator keystrokes.
+// This keeps track of the last 100 calculator keystrokes, it used to safeguard against pressing
+// two operand buttons back-to-back, but it serves no immediate purpose right now. Still could be useful down the road.
 class Keystrokes {
     constructor() {
         this.strokes = [];
@@ -218,12 +224,14 @@ class Keystrokes {
 }
 const keystrokes = new Keystrokes(); 
 
+// This is the place where calculator class types get connected to the UI
+// vvvvvvvvv
 
-// Arithmetic buttons.
+// Calculator buttons.
 const numberButtons = document.querySelectorAll('[data-number]');
 const operationButtons = document.querySelectorAll('[data-operation]');
 
-// Changes the look of the buttons so the user knows which operation they're using.
+// Changes the look of the operation buttons so the player knows which operation they're using.
 function makeOperationsUnused() {
     operationButtons.forEach(button => {
         button.classList.remove('op-inuse');
@@ -231,7 +239,7 @@ function makeOperationsUnused() {
         button.classList.add('calcButton:active');
     })
 }
-// ^v^v^v^v^v^v^v^v^v^v^v^v
+// The same but for the numbers TODO: This doesn't show on-screen.
 function makeNumbersUnused () {
     numberButtons.forEach(button => {
         button.classList.remove('num-inuse');
@@ -246,17 +254,23 @@ const allClearButton = document.querySelector('[data-all-clear]');
 const submitEqualsButton = document.querySelector('[data-submit-equals]');
 
 const currentOperandTextElement = document.querySelector('[data-display]');
-// const previousOperandTextElement = undefined; // This may come in use later...
+// const previousOperandTextElement = undefined; // Some calculators show the previous operand, to change the design this will be needed.
+
+// ^^^^^^^^^
+// End of class-types connecting to UI
 
 const calculator = new Calculator(currentOperandTextElement);
 
+// This is a quick-and-dirty solution to a problem further down in the code.
 let isAnswered = false;
-
 function invertIfTrue(bool) {
     // console.log(bool);
     if(bool) {bool = !bool;}
     return bool;
 }
+
+// Event listeners for all the calculator buttons
+// vvvvvvvvvv
 
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -300,7 +314,7 @@ allClearButton.addEventListener('click', () => {
 operationButtons.forEach(button => {
     button.addEventListener('click', () => {
         
-        // MBIP there's a way to do this without checking the condition every time.
+        // TODO: See if there's a way to do this without checking the condition every time.
         if (!isAnswered) {
 
             // Only one operation appears selected at a time.
@@ -364,3 +378,6 @@ submitEqualsButton.addEventListener('click', () => {
     calculator.clear();
     keystrokes.append("SUB=");
 })
+
+// ^^^^^^^^^^^
+// End of event listeners for Calculator buttons
